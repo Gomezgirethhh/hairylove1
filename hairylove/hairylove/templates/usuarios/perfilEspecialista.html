@@ -1,0 +1,259 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil de Especialista | Hairy Love</title>
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #FFFFFF;
+        }
+
+        .navbar {
+            background: #6a0dad;
+            padding: 1rem;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .specialist-container {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .profile-card, .dashboard-section {
+            border: 2px solid #6a0dad;
+            border-radius: 15px;
+            padding: 20px;
+        }
+
+        .btn {
+            padding: 10px;
+            border-radius: 20px;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary { background: purple; color: white; }
+        .btn-success { background: green; color: white; }
+        .btn-danger { background: red; color: white; }
+
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <div><strong>Hairy Love</strong></div>
+
+    <div>
+        {{ request.user.first_name }} {{ request.user.last_name }}
+        <a href="{% url 'logout' %}" style="color:white;">Cerrar sesión</a>
+    </div>
+</div>
+
+<div class="specialist-container">
+
+    <!-- PERFIL -->
+    <div class="profile-card">
+
+        <img src="{{ especialista.foto}}" width="120" style="border-radius:50%;">
+
+        <form action="{% url 'actualizar_foto' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" name="foto_perfil_esp">
+            <button type="submit">Actualizar</button>
+        </form>
+
+        <h2>{{ request.user.nombre }} {{request.user.apellido}}</h2>
+        <p>{{ especialista.descripcion }}</p>
+
+        <p><strong>Clientes:</strong> {{ especialista.clientes }}</p>
+        <p><strong>Rating:</strong> {{ especialista.rating }}</p>
+
+        <a href="{% url 'editar_perfil' %}" class="btn btn-primary">✏️ Editar Perfil</a>
+
+        <!-- SECCIÓN DE CALIFICACIÓN -->
+        <div class="rating-section" style="
+            margin-top: 25px;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(255, 107, 157, 0.1), rgba(255, 143, 188, 0.1));
+            border-radius: 12px;
+            border-left: 4px solid #FF6B9D;
+            text-align: center;
+        ">
+            <div style="font-size: 0.9em; color: #666; margin-bottom: 10px;">
+                <strong>Calificación Promedio</strong>
+            </div>
+            {% if request.user.total_calificaciones > 0 %}
+                <div style="font-size: 2em; font-weight: bold; color: #FFD700; margin-bottom: 5px;">
+                    ⭐ {{ request.user.puntuacion_promedio }}/5
+                </div>
+                <div style="font-size: 0.85em; color: #999;">
+                    basado en {{ request.user.total_calificaciones }} calificación{{ request.user.total_calificaciones|pluralize }}
+                </div>
+            {% else %}
+                <div style="font-size: 0.9em; color: #999;">
+                    Sin calificaciones aún
+                </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- CONTENIDO -->
+    <div>
+
+        <!-- SOLICITUDES -->
+        <div class="dashboard-section">
+            <h3>Solicitudes</h3>
+
+            {% for solicitud in solicitudes %}
+            <div style="border:1px solid #ccc; padding:10px; margin-bottom:10px;">
+
+                <strong>{{ solicitud.cliente }}</strong><br>
+                Mascota: {{ solicitud.mascota }}<br>
+                Servicio: {{ solicitud.servicio }}<br>
+                Fecha: {{ solicitud.fecha }}<br>
+                Precio: {{ solicitud.precio }}
+
+                <p>{{ solicitud.mensaje }}</p>
+
+                <button class="btn btn-success">Aceptar</button>
+                <button class="btn btn-danger">Rechazar</button>
+
+            </div>
+            {% empty %}
+                <p>No hay solicitudes</p>
+            {% endfor %}
+        </div>
+
+        <!-- SERVICIOS -->
+        <div class="dashboard-section">
+            <h3>
+                Servicios
+                <a href="{% url 'formularioServicios' %}">
+                    <button>+ Nuevo</button>
+                </a>
+            </h3>
+
+            {% for servicio in servicios %}
+            <div style="border:1px solid #ccc; padding:10px; margin-bottom:10px;">
+                <h4>{{ servicio.nombre }}</h4>
+                <p>{{ servicio.descripcion }}</p>
+                <strong>${{ servicio.precio }}</strong>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- DISPONIBILIDAD -->
+        <div class="dashboard-section">
+            <h3>Disponibilidad</h3>
+
+            <table border="1" width="100%">
+                <tr>
+                    <th>Hora</th>
+                    <th>Lun</th>
+                    <th>Mar</th>
+                    <th>Mié</th>
+                </tr>
+            </table>
+        </div>
+
+        <!-- SECCIÓN DE CALIFICACIONES RECIBIDAS -->
+        <div class="dashboard-section">
+            <h3>⭐ Calificaciones Recibidas
+                <a href="{% url 'estadisticas_calificaciones' %}" class="btn btn-primary" style="float: right; font-size: 0.9em;">
+                    <i class="fas fa-chart-bar"></i> Ver Estadísticas Completas
+                </a>
+            </h3>
+            
+            {% if calificaciones_recibidas %}
+            <div style="display: grid; grid-template-columns: 1fr; gap: 15px; margin-bottom: 40px;">
+            {% for calificacion in calificaciones_recibidas %}
+                <div style="background: white; border-radius: 12px; padding: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border-left: 4px solid #FFD700;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            <div style="width: 40px; height: 40px; border-radius: 50%; background: linear-gradient(135deg, #FF6B9D, #FF8FBC); display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 1.2em;">
+                                {{ calificacion.usuario_califica.nombre|first|upper }}
+                            </div>
+                            <div>
+                                <h5 style="margin: 0; color: #333; font-size: 0.95em; font-weight: 600;">
+                                    {{ calificacion.usuario_califica.nombre }} {{ calificacion.usuario_califica.apellido }}
+                                </h5>
+                                <p style="margin: 2px 0 0; color: #999; font-size: 0.8em;">
+                                    {{ calificacion.fecha_creacion|date:"d/m/Y H:i" }}
+                                </p>
+                            </div>
+                        </div>
+                        <div style="font-weight: 700; font-size: 1.1em; color: #FFD700;">
+                            {% for _ in "x"|rjust:calificacion.puntuacion %}⭐{% endfor %} {{ calificacion.puntuacion }}/5
+                        </div>
+                    </div>
+                    
+                    {% if calificacion.comentario %}
+                    <div style="color: #666; font-size: 0.9em; line-height: 1.5; padding: 12px; background: #f9f9f9; border-radius: 8px; border-left: 3px solid #FFD700;">
+                        <strong>💬 Comentario:</strong> {{ calificacion.comentario }}
+                    </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            </div>
+            {% else %}
+            <p style="color: #999; text-align: center; padding: 30px;">
+                📭 Aún no tienes calificaciones. ¡Completa servicios y pide a otros que te califiquen!
+            </p>
+            {% endif %}
+        </div>
+
+    </div>
+
+</body>
+</html>
+
+                <tr>
+                    <td>9-12</td>
+                    <td>Disponible</td>
+                    <td>No disponible</td>
+                    <td>Disponible</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- HISTORIAL -->
+        <div class="dashboard-section">
+            <h3>Historial</h3>
+
+            {% for h in historial %}
+            <div style="border:1px solid #ccc; padding:10px; margin-bottom:10px;">
+                Cliente: {{ h.cliente }}<br>
+                Servicio: {{ h.servicio }}<br>
+                Estado: {{ h.estado }}
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+window.addEventListener("pageshow", function (event) {
+    if (event.persisted || performance.getEntriesByType("navigation")[0].type === "back_forward") {
+        window.location.href = "{% url 'index' %}";
+    }
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,335 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Carga Masiva de Mascotas | Hairy Love{% endblock %}
+
+{% block extra_css %}
+<style>
+    .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    .header {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .header h1 {
+        color: #e83e8c;
+        font-size: 2.5em;
+        margin-bottom: 10px;
+    }
+
+    .header p {
+        color: #666;
+        font-size: 1.1em;
+    }
+
+    .upload-section {
+        background: white;
+        border-radius: 15px;
+        padding: 30px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        margin-bottom: 30px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .form-group input[type="file"] {
+        width: 100%;
+        padding: 12px;
+        border: 2px dashed #ddd;
+        border-radius: 8px;
+        background: #f9f9f9;
+        transition: all 0.3s ease;
+    }
+
+    .form-group input[type="file"]:hover {
+        border-color: #e83e8c;
+        background: #fff5f7;
+    }
+
+    .help-text {
+        color: #666;
+        font-size: 0.9em;
+        margin-top: 5px;
+    }
+
+    .btn-submit {
+        background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+        color: white;
+        padding: 12px 30px;
+        border: none;
+        border-radius: 8px;
+        font-size: 1.1em;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        width: 100%;
+    }
+
+    .btn-submit:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+    }
+
+    .format-section {
+        background: #f8f9fa;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+
+    .format-section h3 {
+        color: #e83e8c;
+        margin-bottom: 15px;
+    }
+
+    .format-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+    }
+
+    .format-table th,
+    .format-table td {
+        padding: 8px 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .format-table th {
+        background: #e83e8c;
+        color: white;
+        font-weight: bold;
+    }
+
+    .required {
+        color: #dc3545;
+        font-weight: bold;
+    }
+
+    .download-template {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .download-template a {
+        color: #007bff;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .download-template a:hover {
+        text-decoration: underline;
+    }
+
+    .alert {
+        padding: 15px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+    }
+
+    .alert-info {
+        background: #d1ecf1;
+        border: 1px solid #bee5eb;
+        color: #0c5460;
+    }
+
+    .alert-success {
+        background: #d4edda;
+        border: 1px solid #c3e6cb;
+        color: #155724;
+    }
+
+    .alert-warning {
+        background: #fff3cd;
+        border: 1px solid #ffeaa7;
+        color: #856404;
+    }
+
+    .alert-danger {
+        background: #f8d7da;
+        border: 1px solid #f5c6cb;
+        color: #721c24;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Header -->
+    <div class="header">
+        <h1>📊 Carga Masiva de Mascotas</h1>
+        <p>Sube múltiples mascotas desde un archivo Excel de manera eficiente</p>
+    </div>
+
+    <!-- Mensajes -->
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <!-- Formulario de Upload -->
+    <div class="upload-section">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="{{ form.archivo_excel.id_for_label }}">{{ form.archivo_excel.label }}</label>
+                {{ form.archivo_excel }}
+                {% if form.archivo_excel.help_text %}
+                    <div class="help-text">{{ form.archivo_excel.help_text }}</div>
+                {% endif %}
+                {% if form.archivo_excel.errors %}
+                    <div class="alert alert-danger">
+                        {% for error in form.archivo_excel.errors %}
+                            {{ error }}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+            <button type="submit" class="btn-submit">📤 Subir y Procesar Archivo</button>
+        </form>
+    </div>
+
+    <!-- Formato Esperado -->
+    <div class="format-section">
+        <h3>📋 Formato del Archivo Excel</h3>
+        <p>El archivo debe tener las siguientes columnas en orden (fila 1 como encabezados):</p>
+
+        <table class="format-table">
+            <thead>
+                <tr>
+                    <th>Columna</th>
+                    <th>Campo</th>
+                    <th>Requerido</th>
+                    <th>Ejemplo</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>A</td>
+                    <td>Nombre_Mascota</td>
+                    <td class="required">Sí</td>
+                    <td>Max</td>
+                </tr>
+                <tr>
+                    <td>B</td>
+                    <td>Fecha_Nacimiento</td>
+                    <td class="required">Sí</td>
+                    <td>2020-05-15</td>
+                </tr>
+                <tr>
+                    <td>C</td>
+                    <td>Raza</td>
+                    <td class="required">Sí</td>
+                    <td>Labrador Retriever</td>
+                </tr>
+                <tr>
+                    <td>D</td>
+                    <td>Genero</td>
+                    <td class="required">Sí</td>
+                    <td>Macho/Hembra</td>
+                </tr>
+                <tr>
+                    <td>E</td>
+                    <td>Peso</td>
+                    <td>Sí</td>
+                    <td>25.5</td>
+                </tr>
+                <tr>
+                    <td>F</td>
+                    <td>Especie</td>
+                    <td>Sí</td>
+                    <td>Perro</td>
+                </tr>
+                <tr>
+                    <td>G</td>
+                    <td>Color</td>
+                    <td>Sí</td>
+                    <td>Dorado</td>
+                </tr>
+                <tr>
+                    <td>H</td>
+                    <td>Tamaño</td>
+                    <td>Sí</td>
+                    <td>Grande</td>
+                </tr>
+                <tr>
+                    <td>I</td>
+                    <td>Historial_Mascota</td>
+                    <td>Sí</td>
+                    <td>Rescatado de la calle</td>
+                </tr>
+                <tr>
+                    <td>J</td>
+                    <td>Tipo_Alimentación</td>
+                    <td>Sí</td>
+                    <td>Croquetas premium</td>
+                </tr>
+                <tr>
+                    <td>K</td>
+                    <td>Enfermedades</td>
+                    <td>Sí</td>
+                    <td>Ninguna</td>
+                </tr>
+                <tr>
+                    <td>L</td>
+                    <td>Vivienda</td>
+                    <td>Sí</td>
+                    <td>Casa con jardín</td>
+                </tr>
+                <tr>
+                    <td>M</td>
+                    <td>Vacunas</td>
+                    <td>Sí</td>
+                    <td>Al día</td>
+                </tr>
+                <tr>
+                    <td>N</td>
+                    <td>Compatibilidad_Mascota</td>
+                    <td>Sí</td>
+                    <td>Buena con niños y otros perros</td>
+                </tr>
+                <tr>
+                    <td>O</td>
+                    <td>Descripción_Física</td>
+                    <td>Sí</td>
+                    <td>Pelaje suave, ojos expresivos</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="download-template">
+            <p><strong>💡 Consejos:</strong></p>
+            <ul style="text-align: left; display: inline-block;">
+                <li>Usa formato .xlsx (Excel moderno)</li>
+                <li>La fila 1 debe contener los nombres de las columnas exactamente como se muestran arriba</li>
+                <li>Los datos comienzan desde la fila 2</li>
+                <li>Campos marcados como requeridos no pueden estar vacíos</li>
+                <li>La fecha debe estar en formato YYYY-MM-DD</li>
+                <li>Si hay errores en algunas filas, las demás se procesarán correctamente</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Información adicional -->
+    <div class="alert alert-info">
+        <strong>ℹ️ Información:</strong> Solo los criadores pueden acceder a esta funcionalidad. Todas las mascotas cargadas se marcarán como disponibles para adopción y se asignarán automáticamente a tu cuenta de criador.
+    </div>
+</div>
+{% endblock %}

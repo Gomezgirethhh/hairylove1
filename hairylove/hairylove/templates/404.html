@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Página no encontrada (404) - Hairy Love{% endblock %}
+
+{% block content %}
+<div style="min-height: 70vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 60px 20px;">
+    <div>
+        <h1 style="font-size: 4rem; margin-bottom: 1rem; color: #e83e8c;">404</h1>
+        <h2 style="font-size: 2rem; margin-bottom: 1rem;">Lo sentimos, no pudimos encontrar esta página</h2>
+        <p style="font-size: 1rem; color: #555; margin-bottom: 1.5rem;">La URL solicitada no existe o pudo ser movida. Comprueba la dirección o regresa al inicio.</p>
+        <a href="{% url 'index' %}" style="display: inline-block; padding: 12px 25px; background: linear-gradient(135deg,#e83e8c,#a8419f); color: #fff; border-radius: 999px; font-weight: 700; text-decoration: none;">Volver al inicio</a>
+    </div>
+</div>
+{% endblock %}

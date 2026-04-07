@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Error de servidor (500) - Hairy Love{% endblock %}
+
+{% block content %}
+<div style="min-height: 70vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 60px 20px;">
+    <div>
+        <h1 style="font-size: 4rem; margin-bottom: 1rem; color: #e83e8c;">500</h1>
+        <h2 style="font-size: 2rem; margin-bottom: 1rem;">Oops, algo salió mal</h2>
+        <p style="font-size: 1rem; color: #555; margin-bottom: 1.5rem;">Hemos recibido el error y el equipo de Hairy Love ya está al tanto. Intenta recargar o vuelve más tarde.</p>
+        <a href="{% url 'index' %}" style="display: inline-block; padding: 12px 25px; background: linear-gradient(135deg,#e83e8c,#a8419f); color: #fff; border-radius: 999px; font-weight: 700; text-decoration: none;">Ir al inicio</a>
+    </div>
+</div>
+{% endblock %}

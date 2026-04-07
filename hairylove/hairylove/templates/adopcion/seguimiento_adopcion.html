@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Seguimiento de Adopción{% endblock %}
+
+{% block content %}
+<div class="container" style="padding:2rem; max-width:800px;">
+    <h2>Seguimiento de Adopción - {{ adopcion.idAdopcion }}</h2>
+    <p><strong>Mascota:</strong> {{ adopcion.idMascota.Nombre_Mascota }}</p>
+    <p><strong>Estado:</strong> {{ adopcion.Estado }}</p>
+    <p><strong>Control de adopción:</strong></p>
+    <p style="white-space: pre-wrap; background: #f5f5f5; border: 1px solid #ddd; padding: 12px;">{{ adopcion.Control_Adopción }}</p>
+
+    <form method="post" style="margin-top:1rem;">
+        {% csrf_token %}
+        <label for="reporte">Informe de seguimiento</label>
+        <textarea name="reporte" id="reporte" class="form-control" rows="4" placeholder="Describe el estado actual de la mascota..." required></textarea>
+        <button type="submit" class="btn btn-success" style="margin-top:10px;">Guardar Seguimiento</button>
+    </form>
+
+    <a href="{% url 'mis_adopciones' %}" class="btn btn-link" style="margin-top:15px; display:inline-block;">← Volver a mis adopciones</a>
+</div>
+{% endblock %}

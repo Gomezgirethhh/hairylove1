@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Chats - Hairy Love{% endblock %}
+
+{% block content %}
+<div class="container" style="padding: 2rem; max-width: 900px;">
+    <div style="display:flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+        <div>
+            <h2>Chats disponibles</h2>
+            <p style="color:#666;">Aquí están los usuarios con los que puedes comunicarte sobre la adopción.</p>
+        </div>
+    </div>
+
+    {% if usuarios_chat %}
+        <div class="list-group">
+            {% for usuario_contacto in usuarios_chat %}
+                <a href="{% url 'chat_mensajes' usuario_contacto.idUsuario %}" class="list-group-item list-group-item-action" style="border-radius: 12px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; padding: 1rem; background:white; box-shadow:0 2px 8px rgba(0,0,0,0.05);">
+                    <div>
+                        <h5 style="margin: 0;">{{ usuario_contacto.nombre }} {{ usuario_contacto.apellido }}</h5>
+                        <p style="margin: 5px 0 0; color: #555;">{{ usuario_contacto.tipo }}</p>
+                    </div>
+                    <span style="color: #e83e8c; font-weight: 700;">Abrir chat</span>
+                </a>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div style="padding: 2rem; background: white; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.08); text-align:center;">
+            <h4>No hay usuarios disponibles para chat</h4>
+            <p style="color: #666;">Aún no tienes ninguna conexión de adopción activa. Inicia una solicitud de adopción o espera una respuesta para comenzar la conversación.</p>
+        </div>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,4418 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mascotas Disponibles para Adopción - Hairy Love</title>
+    
+    <!-- Estilos -->
+    <link rel="stylesheet" href="/static/css/base.css">
+    <link rel="stylesheet" href="/static/css/pet-animations.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+<style>
+    .filtros-section {
+        background: white;
+        padding: 2rem;
+        border-radius: 15px;
+        margin-bottom: 2rem;
+        box-shadow: 0 4px 8px rgba(232, 62, 140, 0.15);
+    }
+
+    .filtro-grupo {
+        margin-bottom: 1.5rem;
+    }
+
+    .filtro-grupo label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: #e83e8c;
+        font-weight: 600;
+        font-size: 0.95rem;
+    }
+
+    .filtro-grupo select {
+        width: 100%;
+        padding: 0.75rem;
+        border: 2px solid rgba(232, 62, 140, 0.2);
+        border-radius: 8px;
+    }
+
+    .info-mascota {
+        background: rgba(232, 62, 140, 0.05);
+        padding: 1rem;
+        border-left: 4px solid #e83e8c;
+        margin: 1rem 0;
+        border-radius: 5px;
+    }
+</style>
+
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐾</text></svg>">
+    
+    <style>
+        /* Mejoramientos de navegación */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: linear-gradient(135deg, white 0%, rgba(240, 230, 246, 0.8) 100%);
+            box-shadow: 0 2px 10px rgba(232, 62, 140, 0.1);
+            animation: slideDownHeader 0.5s ease;
+        }
+        
+        @keyframes slideDownHeader {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        nav {
+            padding: 0.1rem 0 !important;
+            background: transparent !important;
+            box-shadow: none !important;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.1rem 0;
+            gap: 0.8rem;
+        }
+        
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            flex: 0.3;
+        }
+        
+        .logo-section h1 {
+            margin: 0;
+            color: #e83e8c;
+            font-size: 1.4rem;
+            animation: float-animation 3s ease-in-out infinite;
+            transition: all 0.3s ease;
+        }
+        
+        .logo-section h1:hover {
+            transform: scale(1.1);
+            text-shadow: 0 0 20px rgba(232, 62, 140, 0.4);
+        }
+        
+        .logo-section p {
+            margin: 0;
+            font-size: 0.85rem;
+            color: #a8419f;
+            font-style: italic;
+        }
+        
+        /* Búsqueda rápida */
+        .search-box {
+            flex: 0.1;
+            max-width: 200px;
+        }
+        
+        .search-box input {
+            width: 100%;
+            padding: 0.4rem 0.75rem;
+            border: 2px solid rgba(232, 62, 140, 0.2);
+            border-radius: 40px;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+        
+        .search-box input:focus {
+            outline: none;
+            border-color: #e83e8c;
+            box-shadow: 0 0 10px rgba(232, 62, 140, 0.2);
+        }
+        
+        .nav-links {
+            flex: 0.3;
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+            margin: 0;
+            align-items: center;
+        }
+        
+        .nav-links li a {
+            color: var(--color-text);
+            font-weight: 600;
+            padding: 0.25rem 0.6rem;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+        
+        /* Estilos especiales para botones en nav */
+        .nav-links li a[style*="background: rgba(232, 62, 140, 0.1)"],
+        .nav-links li a[style*="background: linear-gradient"] {
+            padding: 0.65rem 1.3rem !important;
+            border-radius: 25px !important;
+            font-weight: 700 !important;
+        }
+        
+        .nav-links li a[style*="background: rgba(232, 62, 140, 0.1)"] {
+            border: 2px solid #e83e8c !important;
+        }
+        
+        .nav-links li a[style*="background: linear-gradient"] {
+            box-shadow: 0 4px 12px rgba(232, 62, 140, 0.3) !important;
+        }
+        
+        .nav-links li a:hover {
+            background: rgba(232, 62, 140, 0.1);
+            color: #e83e8c;
+            transform: translateY(-2px);
+            text-decoration: none;
+        }
+        
+        .nav-links li a.active {
+            color: white;
+            background: linear-gradient(135deg, #e83e8c, #a8419f);
+            box-shadow: 0 4px 15px rgba(232, 62, 140, 0.3);
+        }
+        
+        /* Badge de notificaciones */
+        .notification-badge {
+            background: #dc3545;
+            color: white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: bold;
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        /* Usuario info */
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #e83e8c, #a8419f);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            animation: bounce-soft 0.6s ease;
+        }
+        
+        /* Footer mejorado */
+        footer {
+            background: linear-gradient(135deg, #2c3e50, #34495e) !important;
+            padding: 3rem 1rem !important;
+            margin-top: 4rem;
+        }
+        
+        footer p {
+            color: white !important;
+        }
+        
+        footer a {
+            color: #e83e8c !important;
+            transition: all 0.3s ease;
+        }
+        
+        footer a:hover {
+            color: #ff69b4 !important;
+            text-decoration: underline;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h4 {
+            color: #e83e8c;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .nav-container {
+                gap: 1rem;
+            }
+            
+            .search-box {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .nav-links {
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+            
+            .logo-section {
+                flex: 1;
+            }
+            
+            .search-box {
+                width: 100%;
+                max-width: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER Y NAVEGACIÓN -->
+    <header>
+        <nav>
+            <div class="container">
+                <div class="nav-container">
+                    <!-- Logo -->
+                    <div class="logo-section">
+                        <div>
+                            <h1>🐾 Hairy Love</h1>
+                            <p>Encuentra tu compañero perfecto</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Búsqueda rápida -->
+                    <div class="search-box">
+                        <input type="text" placeholder="🔍 Buscar mascotas..." id="quickSearch" autocomplete="off">
+                    </div>
+                    
+                    <!-- Menu de navegación -->
+                    <ul class="nav-links">
+                        <li><a href="/"><i class="fas fa-home"></i> Inicio</a></li>
+                        <li><a href="/mascotas-adopcion/"><i class="fas fa-heart"></i> Adoptar</a></li>
+                        
+                            <li><a href="/login/" style="background: rgba(232, 62, 140, 0.1); color: #e83e8c;"><i class="fas fa-sign-in-alt"></i> Iniciar</a></li>
+                            <li><a href="/registro/" style="background: linear-gradient(135deg, #e83e8c, #a8419f); color: white;"><i class="fas fa-user-plus"></i> Registrarse</a></li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- MENSAJES -->
+    
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main style="padding: 2rem 0; min-height: calc(100vh - 300px);">
+        
+<div class="container">
+    <!-- ENCABEZADO -->
+    <div style="text-align: center; margin: 3rem 0;">
+        <h1 style="color: #e83e8c;">🐾 Mascotas Disponibles para Adopción</h1>
+        <p style="color: #a8419f; font-size: 1.1rem;">Encuentra tu compañero perfecto entre nuestras mascotas rescatadas</p>
+    </div>
+
+    <!-- FORMULARIO DE FILTROS -->
+    <div class="filtros-section">
+        <h3 style="margin-top: 0; color: #e83e8c;">🔍 Filtrar Mascotas</h3>
+        <form id="form-filtros" method="get" action="" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+            <div class="filtro-grupo">
+                <label for="especie">Especie</label>
+                <select id="especie" name="especie" class="form-control">
+                    <option value="">Todas las especies</option>
+                    <option value="Perro">🐕 Perro</option>
+                    <option value="Gato">🐈 Gato</option>
+                    <option value="Conejo">🐰 Conejo</option>
+                    <option value="Ave">🦜 Ave</option>
+                    <option value="Roedor">🐹 Roedor</option>
+                    <option value="Reptil">🦎 Reptil</option>
+                    <option value="Pez">🐠 Pez</option>
+                </select>
+            </div>
+
+            <div class="filtro-grupo">
+                <label for="raza">Raza</label>
+                <select id="raza" name="raza" class="form-control">
+                    <option value="">Todas las razas</option>
+                </select>
+            </div>
+
+            <div class="filtro-grupo">
+                <label for="genero">Género</label>
+                <select id="genero" name="genero" class="form-control">
+                    <option value="">Ambos géneros</option>
+                    <option value="Macho">Macho</option>
+                    <option value="Hembra">Hembra</option>
+                </select>
+            </div>
+
+            <div class="filtro-grupo">
+                <label for="estado_salud">Estado de Salud</label>
+                <select id="estado_salud" name="estado_salud" class="form-control">
+                    <option value="">Todos los estados</option>
+                    <option value="Excelente">✅ Excelente</option>
+                    <option value="Buena">Buena</option>
+                    <option value="Regular">Regular</option>
+                    <option value="Mala">Mala</option>
+                </select>
+            </div>
+
+            <div class="filtro-grupo">
+                <label for="esterilizado">Esterilizado</label>
+                <select id="esterilizado" name="esterilizado" class="form-control">
+                    <option value="">Cualquier estado</option>
+                    <option value="true">Sí</option>
+                    <option value="false">No</option>
+                </select>
+            </div>
+
+            <div class="filtro-grupo">
+                <label for="busqueda">Buscar por nombre</label>
+                <input type="text" id="busqueda" name="busqueda" class="form-control" placeholder="Ej: Luna, Max...">
+            </div>
+
+            <div style="display: flex; gap: 1rem; align-items: flex-end;">
+                <button type="submit" class="btn btn-primary" style="flex: 1;">
+                    🔍 Buscar Mascotas
+                </button>
+                <button type="reset" class="btn btn-secondary" style="flex: 1;">
+                    ↺ Limpiar Filtros
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- GRID DE MASCOTAS -->
+    
+        <div class="pets-grid" style="margin-bottom: 3rem;">
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐕
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Drako</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Perro</p>
+                            <p><strong>Raza:</strong> Beagle</p>
+                            <p><strong>Género:</strong> Macho</p>
+                            <p><strong>Peso:</strong> 20.0 kg</p>
+                            <p><strong>Color:</strong> Cafe, negro y blanco</p>
+                            <p><strong>Tamaño:</strong> Mediano</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=1" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐕
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Suki</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Perro</p>
+                            <p><strong>Raza:</strong> Criolla</p>
+                            <p><strong>Género:</strong> Hembra</p>
+                            <p><strong>Peso:</strong> 15.0 kg</p>
+                            <p><strong>Color:</strong> Cafe</p>
+                            <p><strong>Tamaño:</strong> Mediano</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Excelente</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=2" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐈
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Nala 1</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Gato</p>
+                            <p><strong>Raza:</strong> Labrador</p>
+                            <p><strong>Género:</strong> Macho</p>
+                            <p><strong>Peso:</strong> 31.97 kg</p>
+                            <p><strong>Color:</strong> Dorado</p>
+                            <p><strong>Tamaño:</strong> Mediano</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=3" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐈
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Nala 2</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Gato</p>
+                            <p><strong>Raza:</strong> Sphynx</p>
+                            <p><strong>Género:</strong> Hembra</p>
+                            <p><strong>Peso:</strong> 38.94 kg</p>
+                            <p><strong>Color:</strong> Negro</p>
+                            <p><strong>Tamaño:</strong> Mediano</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=4" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐕
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Rocky 3</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Perro</p>
+                            <p><strong>Raza:</strong> Border Collie</p>
+                            <p><strong>Género:</strong> Macho</p>
+                            <p><strong>Peso:</strong> 28.18 kg</p>
+                            <p><strong>Color:</strong> Marrón</p>
+                            <p><strong>Tamaño:</strong> Grande</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=5" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐕
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Simba 4</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Perro</p>
+                            <p><strong>Raza:</strong> Poodle</p>
+                            <p><strong>Género:</strong> Macho</p>
+                            <p><strong>Peso:</strong> 27.97 kg</p>
+                            <p><strong>Color:</strong> Blanco</p>
+                            <p><strong>Tamaño:</strong> Grande</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=6" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐈
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Bella 5</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Gato</p>
+                            <p><strong>Raza:</strong> Husky</p>
+                            <p><strong>Género:</strong> Hembra</p>
+                            <p><strong>Peso:</strong> 11.56 kg</p>
+                            <p><strong>Color:</strong> Marrón</p>
+                            <p><strong>Tamaño:</strong> Mediano</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=7" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐕
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Thor 6</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Perro</p>
+                            <p><strong>Raza:</strong> Shih Tzu</p>
+                            <p><strong>Género:</strong> Hembra</p>
+                            <p><strong>Peso:</strong> 5.24 kg</p>
+                            <p><strong>Color:</strong> Atigrado</p>
+                            <p><strong>Tamaño:</strong> Grande</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=8" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐈
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Simba 7</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Gato</p>
+                            <p><strong>Raza:</strong> Shih Tzu</p>
+                            <p><strong>Género:</strong> Macho</p>
+                            <p><strong>Peso:</strong> 10.27 kg</p>
+                            <p><strong>Color:</strong> Marrón</p>
+                            <p><strong>Tamaño:</strong> Mediano</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=9" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐕
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Chispa 8</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Perro</p>
+                            <p><strong>Raza:</strong> Border Collie</p>
+                            <p><strong>Género:</strong> Hembra</p>
+                            <p><strong>Peso:</strong> 23.22 kg</p>
+                            <p><strong>Color:</strong> Dorado</p>
+                            <p><strong>Tamaño:</strong> Grande</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=10" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐈
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Milo 9</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Gato</p>
+                            <p><strong>Raza:</strong> Golden</p>
+                            <p><strong>Género:</strong> Hembra</p>
+                            <p><strong>Peso:</strong> 32.0 kg</p>
+                            <p><strong>Color:</strong> Dorado</p>
+                            <p><strong>Tamaño:</strong> Grande</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=11" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐕
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Rocky 10</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Perro</p>
+                            <p><strong>Raza:</strong> Golden</p>
+                            <p><strong>Género:</strong> Hembra</p>
+                            <p><strong>Peso:</strong> 31.56 kg</p>
+                            <p><strong>Color:</strong> Blanco</p>
+                            <p><strong>Tamaño:</strong> Pequeño</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=12" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐕
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Simba 11</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Perro</p>
+                            <p><strong>Raza:</strong> Husky</p>
+                            <p><strong>Género:</strong> Hembra</p>
+                            <p><strong>Peso:</strong> 4.72 kg</p>
+                            <p><strong>Color:</strong> Blanco</p>
+                            <p><strong>Tamaño:</strong> Mediano</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=13" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐈
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Lola 12</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Gato</p>
+                            <p><strong>Raza:</strong> Labrador</p>
+                            <p><strong>Género:</strong> Macho</p>
+                            <p><strong>Peso:</strong> 34.4 kg</p>
+                            <p><strong>Color:</strong> Marrón</p>
+                            <p><strong>Tamaño:</strong> Pequeño</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=14" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐈
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Rocky 13</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Gato</p>
+                            <p><strong>Raza:</strong> Sphynx</p>
+                            <p><strong>Género:</strong> Macho</p>
+                            <p><strong>Peso:</strong> 36.85 kg</p>
+                            <p><strong>Color:</strong> Negro</p>
+                            <p><strong>Tamaño:</strong> Mediano</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=15" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐈
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Milo 14</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Gato</p>
+                            <p><strong>Raza:</strong> Siames</p>
+                            <p><strong>Género:</strong> Hembra</p>
+                            <p><strong>Peso:</strong> 25.51 kg</p>
+                            <p><strong>Color:</strong> Dorado</p>
+                            <p><strong>Tamaño:</strong> Grande</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=16" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐕
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Chispa 15</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Perro</p>
+                            <p><strong>Raza:</strong> Border Collie</p>
+                            <p><strong>Género:</strong> Macho</p>
+                            <p><strong>Peso:</strong> 6.03 kg</p>
+                            <p><strong>Color:</strong> Dorado</p>
+                            <p><strong>Tamaño:</strong> Pequeño</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=17" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐈
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Thor 16</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Gato</p>
+                            <p><strong>Raza:</strong> Labrador</p>
+                            <p><strong>Género:</strong> Hembra</p>
+                            <p><strong>Peso:</strong> 31.81 kg</p>
+                            <p><strong>Color:</strong> Dorado</p>
+                            <p><strong>Tamaño:</strong> Grande</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=18" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐕
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Chispa 17</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Perro</p>
+                            <p><strong>Raza:</strong> Golden</p>
+                            <p><strong>Género:</strong> Macho</p>
+                            <p><strong>Peso:</strong> 37.24 kg</p>
+                            <p><strong>Color:</strong> Marrón</p>
+                            <p><strong>Tamaño:</strong> Grande</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=19" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐕
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Milo 18</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Perro</p>
+                            <p><strong>Raza:</strong> Siames</p>
+                            <p><strong>Género:</strong> Hembra</p>
+                            <p><strong>Peso:</strong> 39.38 kg</p>
+                            <p><strong>Color:</strong> Atigrado</p>
+                            <p><strong>Tamaño:</strong> Mediano</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=20" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐕
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Luna 19</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Perro</p>
+                            <p><strong>Raza:</strong> Sphynx</p>
+                            <p><strong>Género:</strong> Macho</p>
+                            <p><strong>Peso:</strong> 11.72 kg</p>
+                            <p><strong>Color:</strong> Marrón</p>
+                            <p><strong>Tamaño:</strong> Pequeño</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=21" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐈
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Bella 20</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Gato</p>
+                            <p><strong>Raza:</strong> Border Collie</p>
+                            <p><strong>Género:</strong> Hembra</p>
+                            <p><strong>Peso:</strong> 8.95 kg</p>
+                            <p><strong>Color:</strong> Blanco</p>
+                            <p><strong>Tamaño:</strong> Pequeño</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=22" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐕
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Chispa 21</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Perro</p>
+                            <p><strong>Raza:</strong> Golden</p>
+                            <p><strong>Género:</strong> Hembra</p>
+                            <p><strong>Peso:</strong> 6.0 kg</p>
+                            <p><strong>Color:</strong> Negro</p>
+                            <p><strong>Tamaño:</strong> Pequeño</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=23" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐕
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Max 22</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Perro</p>
+                            <p><strong>Raza:</strong> Salchicha</p>
+                            <p><strong>Género:</strong> Macho</p>
+                            <p><strong>Peso:</strong> 17.86 kg</p>
+                            <p><strong>Color:</strong> Dorado</p>
+                            <p><strong>Tamaño:</strong> Grande</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=24" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐈
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Rocky 23</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Gato</p>
+                            <p><strong>Raza:</strong> Golden</p>
+                            <p><strong>Género:</strong> Hembra</p>
+                            <p><strong>Peso:</strong> 13.12 kg</p>
+                            <p><strong>Color:</strong> Negro</p>
+                            <p><strong>Tamaño:</strong> Grande</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=25" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐈
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Milo 24</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Gato</p>
+                            <p><strong>Raza:</strong> Labrador</p>
+                            <p><strong>Género:</strong> Macho</p>
+                            <p><strong>Peso:</strong> 19.24 kg</p>
+                            <p><strong>Color:</strong> Negro</p>
+                            <p><strong>Tamaño:</strong> Mediano</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=26" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐕
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Lola 25</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Perro</p>
+                            <p><strong>Raza:</strong> Husky</p>
+                            <p><strong>Género:</strong> Hembra</p>
+                            <p><strong>Peso:</strong> 21.68 kg</p>
+                            <p><strong>Color:</strong> Negro</p>
+                            <p><strong>Tamaño:</strong> Mediano</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=27" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐕
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Simba 26</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Perro</p>
+                            <p><strong>Raza:</strong> Sphynx</p>
+                            <p><strong>Género:</strong> Hembra</p>
+                            <p><strong>Peso:</strong> 7.06 kg</p>
+                            <p><strong>Color:</strong> Marrón</p>
+                            <p><strong>Tamaño:</strong> Mediano</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=28" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐈
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Thor 27</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Gato</p>
+                            <p><strong>Raza:</strong> Salchicha</p>
+                            <p><strong>Género:</strong> Macho</p>
+                            <p><strong>Peso:</strong> 33.51 kg</p>
+                            <p><strong>Color:</strong> Blanco</p>
+                            <p><strong>Tamaño:</strong> Pequeño</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=29" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐕
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Thor 28</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Perro</p>
+                            <p><strong>Raza:</strong> Labrador</p>
+                            <p><strong>Género:</strong> Hembra</p>
+                            <p><strong>Peso:</strong> 23.73 kg</p>
+                            <p><strong>Color:</strong> Dorado</p>
+                            <p><strong>Tamaño:</strong> Pequeño</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=30" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐈
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Max 29</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Gato</p>
+                            <p><strong>Raza:</strong> Persa</p>
+                            <p><strong>Género:</strong> Macho</p>
+                            <p><strong>Peso:</strong> 17.01 kg</p>
+                            <p><strong>Color:</strong> Negro</p>
+                            <p><strong>Tamaño:</strong> Grande</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=31" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐕
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Lola 30</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Perro</p>
+                            <p><strong>Raza:</strong> Husky</p>
+                            <p><strong>Género:</strong> Macho</p>
+                            <p><strong>Peso:</strong> 31.44 kg</p>
+                            <p><strong>Color:</strong> Negro</p>
+                            <p><strong>Tamaño:</strong> Grande</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=32" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐕
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Max 31</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Perro</p>
+                            <p><strong>Raza:</strong> Labrador</p>
+                            <p><strong>Género:</strong> Macho</p>
+                            <p><strong>Peso:</strong> 38.37 kg</p>
+                            <p><strong>Color:</strong> Negro</p>
+                            <p><strong>Tamaño:</strong> Pequeño</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=33" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐈
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Milo 32</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Gato</p>
+                            <p><strong>Raza:</strong> Sphynx</p>
+                            <p><strong>Género:</strong> Hembra</p>
+                            <p><strong>Peso:</strong> 29.12 kg</p>
+                            <p><strong>Color:</strong> Marrón</p>
+                            <p><strong>Tamaño:</strong> Mediano</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=34" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐈
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Thor 33</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Gato</p>
+                            <p><strong>Raza:</strong> Shih Tzu</p>
+                            <p><strong>Género:</strong> Hembra</p>
+                            <p><strong>Peso:</strong> 28.77 kg</p>
+                            <p><strong>Color:</strong> Negro</p>
+                            <p><strong>Tamaño:</strong> Grande</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=35" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐈
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Chispa 34</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Gato</p>
+                            <p><strong>Raza:</strong> Shih Tzu</p>
+                            <p><strong>Género:</strong> Macho</p>
+                            <p><strong>Peso:</strong> 33.83 kg</p>
+                            <p><strong>Color:</strong> Negro</p>
+                            <p><strong>Tamaño:</strong> Grande</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=36" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐕
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Max 35</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Perro</p>
+                            <p><strong>Raza:</strong> Poodle</p>
+                            <p><strong>Género:</strong> Hembra</p>
+                            <p><strong>Peso:</strong> 14.06 kg</p>
+                            <p><strong>Color:</strong> Atigrado</p>
+                            <p><strong>Tamaño:</strong> Pequeño</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=37" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐈
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Simba 36</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Gato</p>
+                            <p><strong>Raza:</strong> Salchicha</p>
+                            <p><strong>Género:</strong> Hembra</p>
+                            <p><strong>Peso:</strong> 33.75 kg</p>
+                            <p><strong>Color:</strong> Marrón</p>
+                            <p><strong>Tamaño:</strong> Mediano</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=38" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐈
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Luna 37</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Gato</p>
+                            <p><strong>Raza:</strong> Poodle</p>
+                            <p><strong>Género:</strong> Hembra</p>
+                            <p><strong>Peso:</strong> 4.75 kg</p>
+                            <p><strong>Color:</strong> Marrón</p>
+                            <p><strong>Tamaño:</strong> Grande</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=39" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐕
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Chispa 38</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Perro</p>
+                            <p><strong>Raza:</strong> Shih Tzu</p>
+                            <p><strong>Género:</strong> Hembra</p>
+                            <p><strong>Peso:</strong> 28.18 kg</p>
+                            <p><strong>Color:</strong> Dorado</p>
+                            <p><strong>Tamaño:</strong> Pequeño</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=40" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐈
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Lola 39</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Gato</p>
+                            <p><strong>Raza:</strong> Labrador</p>
+                            <p><strong>Género:</strong> Hembra</p>
+                            <p><strong>Peso:</strong> 5.2 kg</p>
+                            <p><strong>Color:</strong> Negro</p>
+                            <p><strong>Tamaño:</strong> Grande</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=41" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐈
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Bella 40</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Gato</p>
+                            <p><strong>Raza:</strong> Golden</p>
+                            <p><strong>Género:</strong> Macho</p>
+                            <p><strong>Peso:</strong> 34.53 kg</p>
+                            <p><strong>Color:</strong> Atigrado</p>
+                            <p><strong>Tamaño:</strong> Pequeño</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=42" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐕
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Thor 41</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Perro</p>
+                            <p><strong>Raza:</strong> Siames</p>
+                            <p><strong>Género:</strong> Macho</p>
+                            <p><strong>Peso:</strong> 5.02 kg</p>
+                            <p><strong>Color:</strong> Marrón</p>
+                            <p><strong>Tamaño:</strong> Grande</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=43" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐕
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Luna 42</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Perro</p>
+                            <p><strong>Raza:</strong> Salchicha</p>
+                            <p><strong>Género:</strong> Hembra</p>
+                            <p><strong>Peso:</strong> 23.63 kg</p>
+                            <p><strong>Color:</strong> Marrón</p>
+                            <p><strong>Tamaño:</strong> Grande</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=44" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐈
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Simba 43</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Gato</p>
+                            <p><strong>Raza:</strong> Persa</p>
+                            <p><strong>Género:</strong> Hembra</p>
+                            <p><strong>Peso:</strong> 3.05 kg</p>
+                            <p><strong>Color:</strong> Negro</p>
+                            <p><strong>Tamaño:</strong> Pequeño</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=45" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐈
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Max 44</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Gato</p>
+                            <p><strong>Raza:</strong> Salchicha</p>
+                            <p><strong>Género:</strong> Hembra</p>
+                            <p><strong>Peso:</strong> 5.54 kg</p>
+                            <p><strong>Color:</strong> Marrón</p>
+                            <p><strong>Tamaño:</strong> Pequeño</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=46" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐈
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Lola 45</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Gato</p>
+                            <p><strong>Raza:</strong> Shih Tzu</p>
+                            <p><strong>Género:</strong> Hembra</p>
+                            <p><strong>Peso:</strong> 32.79 kg</p>
+                            <p><strong>Color:</strong> Atigrado</p>
+                            <p><strong>Tamaño:</strong> Pequeño</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=47" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐕
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Luna 46</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Perro</p>
+                            <p><strong>Raza:</strong> Salchicha</p>
+                            <p><strong>Género:</strong> Hembra</p>
+                            <p><strong>Peso:</strong> 13.26 kg</p>
+                            <p><strong>Color:</strong> Atigrado</p>
+                            <p><strong>Tamaño:</strong> Grande</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=48" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐈
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Thor 47</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Gato</p>
+                            <p><strong>Raza:</strong> Labrador</p>
+                            <p><strong>Género:</strong> Macho</p>
+                            <p><strong>Peso:</strong> 31.8 kg</p>
+                            <p><strong>Color:</strong> Atigrado</p>
+                            <p><strong>Tamaño:</strong> Grande</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=49" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐕
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Lola 48</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Perro</p>
+                            <p><strong>Raza:</strong> Persa</p>
+                            <p><strong>Género:</strong> Macho</p>
+                            <p><strong>Peso:</strong> 11.55 kg</p>
+                            <p><strong>Color:</strong> Marrón</p>
+                            <p><strong>Tamaño:</strong> Pequeño</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=50" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐕
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Lola 49</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Perro</p>
+                            <p><strong>Raza:</strong> Husky</p>
+                            <p><strong>Género:</strong> Macho</p>
+                            <p><strong>Peso:</strong> 38.08 kg</p>
+                            <p><strong>Color:</strong> Marrón</p>
+                            <p><strong>Tamaño:</strong> Mediano</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=51" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐈
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Rocky 50</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Gato</p>
+                            <p><strong>Raza:</strong> Siames</p>
+                            <p><strong>Género:</strong> Macho</p>
+                            <p><strong>Peso:</strong> 21.85 kg</p>
+                            <p><strong>Color:</strong> Blanco</p>
+                            <p><strong>Tamaño:</strong> Pequeño</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=52" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐕
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Milo 51</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Perro</p>
+                            <p><strong>Raza:</strong> Poodle</p>
+                            <p><strong>Género:</strong> Macho</p>
+                            <p><strong>Peso:</strong> 8.46 kg</p>
+                            <p><strong>Color:</strong> Atigrado</p>
+                            <p><strong>Tamaño:</strong> Pequeño</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=53" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐕
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Luna 52</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Perro</p>
+                            <p><strong>Raza:</strong> Border Collie</p>
+                            <p><strong>Género:</strong> Macho</p>
+                            <p><strong>Peso:</strong> 31.86 kg</p>
+                            <p><strong>Color:</strong> Dorado</p>
+                            <p><strong>Tamaño:</strong> Pequeño</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=54" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐕
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Milo 53</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Perro</p>
+                            <p><strong>Raza:</strong> Shih Tzu</p>
+                            <p><strong>Género:</strong> Macho</p>
+                            <p><strong>Peso:</strong> 19.58 kg</p>
+                            <p><strong>Color:</strong> Marrón</p>
+                            <p><strong>Tamaño:</strong> Grande</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=55" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐈
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Simba 54</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Gato</p>
+                            <p><strong>Raza:</strong> Golden</p>
+                            <p><strong>Género:</strong> Macho</p>
+                            <p><strong>Peso:</strong> 9.04 kg</p>
+                            <p><strong>Color:</strong> Atigrado</p>
+                            <p><strong>Tamaño:</strong> Mediano</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=56" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐕
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Milo 55</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Perro</p>
+                            <p><strong>Raza:</strong> Shih Tzu</p>
+                            <p><strong>Género:</strong> Hembra</p>
+                            <p><strong>Peso:</strong> 7.64 kg</p>
+                            <p><strong>Color:</strong> Negro</p>
+                            <p><strong>Tamaño:</strong> Mediano</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=57" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐕
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Max 56</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Perro</p>
+                            <p><strong>Raza:</strong> Shih Tzu</p>
+                            <p><strong>Género:</strong> Hembra</p>
+                            <p><strong>Peso:</strong> 20.66 kg</p>
+                            <p><strong>Color:</strong> Marrón</p>
+                            <p><strong>Tamaño:</strong> Pequeño</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=58" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐕
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Lola 57</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Perro</p>
+                            <p><strong>Raza:</strong> Persa</p>
+                            <p><strong>Género:</strong> Macho</p>
+                            <p><strong>Peso:</strong> 26.53 kg</p>
+                            <p><strong>Color:</strong> Negro</p>
+                            <p><strong>Tamaño:</strong> Mediano</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=59" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐈
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Bella 58</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Gato</p>
+                            <p><strong>Raza:</strong> Poodle</p>
+                            <p><strong>Género:</strong> Hembra</p>
+                            <p><strong>Peso:</strong> 28.49 kg</p>
+                            <p><strong>Color:</strong> Negro</p>
+                            <p><strong>Tamaño:</strong> Pequeño</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=60" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐈
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Lola 59</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Gato</p>
+                            <p><strong>Raza:</strong> Poodle</p>
+                            <p><strong>Género:</strong> Hembra</p>
+                            <p><strong>Peso:</strong> 8.15 kg</p>
+                            <p><strong>Color:</strong> Dorado</p>
+                            <p><strong>Tamaño:</strong> Grande</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=61" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐈
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Nala 60</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Gato</p>
+                            <p><strong>Raza:</strong> Labrador</p>
+                            <p><strong>Género:</strong> Macho</p>
+                            <p><strong>Peso:</strong> 27.64 kg</p>
+                            <p><strong>Color:</strong> Blanco</p>
+                            <p><strong>Tamaño:</strong> Pequeño</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=62" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐈
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Rocky 61</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Gato</p>
+                            <p><strong>Raza:</strong> Sphynx</p>
+                            <p><strong>Género:</strong> Hembra</p>
+                            <p><strong>Peso:</strong> 24.68 kg</p>
+                            <p><strong>Color:</strong> Marrón</p>
+                            <p><strong>Tamaño:</strong> Grande</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=63" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐕
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Rocky 62</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Perro</p>
+                            <p><strong>Raza:</strong> Sphynx</p>
+                            <p><strong>Género:</strong> Macho</p>
+                            <p><strong>Peso:</strong> 15.5 kg</p>
+                            <p><strong>Color:</strong> Blanco</p>
+                            <p><strong>Tamaño:</strong> Pequeño</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=64" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐕
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Chispa 63</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Perro</p>
+                            <p><strong>Raza:</strong> Golden</p>
+                            <p><strong>Género:</strong> Hembra</p>
+                            <p><strong>Peso:</strong> 20.53 kg</p>
+                            <p><strong>Color:</strong> Atigrado</p>
+                            <p><strong>Tamaño:</strong> Mediano</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=65" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐈
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Max 64</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Gato</p>
+                            <p><strong>Raza:</strong> Salchicha</p>
+                            <p><strong>Género:</strong> Hembra</p>
+                            <p><strong>Peso:</strong> 12.31 kg</p>
+                            <p><strong>Color:</strong> Dorado</p>
+                            <p><strong>Tamaño:</strong> Pequeño</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=66" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐈
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Luna 65</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Gato</p>
+                            <p><strong>Raza:</strong> Shih Tzu</p>
+                            <p><strong>Género:</strong> Hembra</p>
+                            <p><strong>Peso:</strong> 37.68 kg</p>
+                            <p><strong>Color:</strong> Dorado</p>
+                            <p><strong>Tamaño:</strong> Mediano</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=67" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐕
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Chispa 66</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Perro</p>
+                            <p><strong>Raza:</strong> Salchicha</p>
+                            <p><strong>Género:</strong> Hembra</p>
+                            <p><strong>Peso:</strong> 32.68 kg</p>
+                            <p><strong>Color:</strong> Marrón</p>
+                            <p><strong>Tamaño:</strong> Grande</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=68" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐕
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Luna 67</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Perro</p>
+                            <p><strong>Raza:</strong> Border Collie</p>
+                            <p><strong>Género:</strong> Hembra</p>
+                            <p><strong>Peso:</strong> 11.36 kg</p>
+                            <p><strong>Color:</strong> Dorado</p>
+                            <p><strong>Tamaño:</strong> Pequeño</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=69" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐈
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Bella 68</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Gato</p>
+                            <p><strong>Raza:</strong> Husky</p>
+                            <p><strong>Género:</strong> Hembra</p>
+                            <p><strong>Peso:</strong> 37.16 kg</p>
+                            <p><strong>Color:</strong> Atigrado</p>
+                            <p><strong>Tamaño:</strong> Pequeño</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=70" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐈
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Nala 69</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Gato</p>
+                            <p><strong>Raza:</strong> Golden</p>
+                            <p><strong>Género:</strong> Macho</p>
+                            <p><strong>Peso:</strong> 28.91 kg</p>
+                            <p><strong>Color:</strong> Dorado</p>
+                            <p><strong>Tamaño:</strong> Mediano</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=71" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐕
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Simba 70</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Perro</p>
+                            <p><strong>Raza:</strong> Golden</p>
+                            <p><strong>Género:</strong> Macho</p>
+                            <p><strong>Peso:</strong> 4.8 kg</p>
+                            <p><strong>Color:</strong> Marrón</p>
+                            <p><strong>Tamaño:</strong> Mediano</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=72" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐈
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Simba 71</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Gato</p>
+                            <p><strong>Raza:</strong> Border Collie</p>
+                            <p><strong>Género:</strong> Hembra</p>
+                            <p><strong>Peso:</strong> 18.84 kg</p>
+                            <p><strong>Color:</strong> Atigrado</p>
+                            <p><strong>Tamaño:</strong> Grande</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=73" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐈
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Simba 72</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Gato</p>
+                            <p><strong>Raza:</strong> Poodle</p>
+                            <p><strong>Género:</strong> Hembra</p>
+                            <p><strong>Peso:</strong> 11.81 kg</p>
+                            <p><strong>Color:</strong> Marrón</p>
+                            <p><strong>Tamaño:</strong> Pequeño</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=74" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐈
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Chispa 73</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Gato</p>
+                            <p><strong>Raza:</strong> Siames</p>
+                            <p><strong>Género:</strong> Macho</p>
+                            <p><strong>Peso:</strong> 35.64 kg</p>
+                            <p><strong>Color:</strong> Dorado</p>
+                            <p><strong>Tamaño:</strong> Mediano</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=75" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐕
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Chispa 74</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Perro</p>
+                            <p><strong>Raza:</strong> Poodle</p>
+                            <p><strong>Género:</strong> Macho</p>
+                            <p><strong>Peso:</strong> 21.08 kg</p>
+                            <p><strong>Color:</strong> Marrón</p>
+                            <p><strong>Tamaño:</strong> Grande</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=76" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐈
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Thor 75</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Gato</p>
+                            <p><strong>Raza:</strong> Golden</p>
+                            <p><strong>Género:</strong> Hembra</p>
+                            <p><strong>Peso:</strong> 32.08 kg</p>
+                            <p><strong>Color:</strong> Blanco</p>
+                            <p><strong>Tamaño:</strong> Mediano</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=77" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐕
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Bella 76</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Perro</p>
+                            <p><strong>Raza:</strong> Poodle</p>
+                            <p><strong>Género:</strong> Macho</p>
+                            <p><strong>Peso:</strong> 38.85 kg</p>
+                            <p><strong>Color:</strong> Atigrado</p>
+                            <p><strong>Tamaño:</strong> Mediano</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=78" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐕
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Nala 77</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Perro</p>
+                            <p><strong>Raza:</strong> Shih Tzu</p>
+                            <p><strong>Género:</strong> Macho</p>
+                            <p><strong>Peso:</strong> 26.22 kg</p>
+                            <p><strong>Color:</strong> Blanco</p>
+                            <p><strong>Tamaño:</strong> Pequeño</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=79" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐈
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Rocky 78</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Gato</p>
+                            <p><strong>Raza:</strong> Labrador</p>
+                            <p><strong>Género:</strong> Hembra</p>
+                            <p><strong>Peso:</strong> 22.88 kg</p>
+                            <p><strong>Color:</strong> Blanco</p>
+                            <p><strong>Tamaño:</strong> Pequeño</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=80" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐕
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Lola 79</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Perro</p>
+                            <p><strong>Raza:</strong> Border Collie</p>
+                            <p><strong>Género:</strong> Hembra</p>
+                            <p><strong>Peso:</strong> 18.97 kg</p>
+                            <p><strong>Color:</strong> Negro</p>
+                            <p><strong>Tamaño:</strong> Mediano</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=81" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐕
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Bella 80</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Perro</p>
+                            <p><strong>Raza:</strong> Golden</p>
+                            <p><strong>Género:</strong> Macho</p>
+                            <p><strong>Peso:</strong> 35.55 kg</p>
+                            <p><strong>Color:</strong> Dorado</p>
+                            <p><strong>Tamaño:</strong> Grande</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=82" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐈
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Chispa 81</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Gato</p>
+                            <p><strong>Raza:</strong> Salchicha</p>
+                            <p><strong>Género:</strong> Hembra</p>
+                            <p><strong>Peso:</strong> 28.76 kg</p>
+                            <p><strong>Color:</strong> Blanco</p>
+                            <p><strong>Tamaño:</strong> Mediano</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=83" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐈
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Lola 82</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Gato</p>
+                            <p><strong>Raza:</strong> Shih Tzu</p>
+                            <p><strong>Género:</strong> Hembra</p>
+                            <p><strong>Peso:</strong> 31.98 kg</p>
+                            <p><strong>Color:</strong> Marrón</p>
+                            <p><strong>Tamaño:</strong> Mediano</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=84" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐈
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Chispa 83</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Gato</p>
+                            <p><strong>Raza:</strong> Golden</p>
+                            <p><strong>Género:</strong> Hembra</p>
+                            <p><strong>Peso:</strong> 9.77 kg</p>
+                            <p><strong>Color:</strong> Negro</p>
+                            <p><strong>Tamaño:</strong> Grande</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=85" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐈
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Luna 84</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Gato</p>
+                            <p><strong>Raza:</strong> Labrador</p>
+                            <p><strong>Género:</strong> Hembra</p>
+                            <p><strong>Peso:</strong> 39.95 kg</p>
+                            <p><strong>Color:</strong> Dorado</p>
+                            <p><strong>Tamaño:</strong> Grande</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=86" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐕
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Luna 85</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Perro</p>
+                            <p><strong>Raza:</strong> Salchicha</p>
+                            <p><strong>Género:</strong> Macho</p>
+                            <p><strong>Peso:</strong> 6.84 kg</p>
+                            <p><strong>Color:</strong> Blanco</p>
+                            <p><strong>Tamaño:</strong> Mediano</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=87" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐕
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Milo 86</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Perro</p>
+                            <p><strong>Raza:</strong> Golden</p>
+                            <p><strong>Género:</strong> Hembra</p>
+                            <p><strong>Peso:</strong> 29.93 kg</p>
+                            <p><strong>Color:</strong> Blanco</p>
+                            <p><strong>Tamaño:</strong> Grande</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=88" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐕
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Simba 87</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Perro</p>
+                            <p><strong>Raza:</strong> Labrador</p>
+                            <p><strong>Género:</strong> Macho</p>
+                            <p><strong>Peso:</strong> 37.73 kg</p>
+                            <p><strong>Color:</strong> Atigrado</p>
+                            <p><strong>Tamaño:</strong> Grande</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=89" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐈
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Simba 88</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Gato</p>
+                            <p><strong>Raza:</strong> Husky</p>
+                            <p><strong>Género:</strong> Macho</p>
+                            <p><strong>Peso:</strong> 31.99 kg</p>
+                            <p><strong>Color:</strong> Marrón</p>
+                            <p><strong>Tamaño:</strong> Grande</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=90" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐈
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Milo 89</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Gato</p>
+                            <p><strong>Raza:</strong> Persa</p>
+                            <p><strong>Género:</strong> Hembra</p>
+                            <p><strong>Peso:</strong> 28.51 kg</p>
+                            <p><strong>Color:</strong> Atigrado</p>
+                            <p><strong>Tamaño:</strong> Pequeño</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=91" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐕
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Lola 90</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Perro</p>
+                            <p><strong>Raza:</strong> Siames</p>
+                            <p><strong>Género:</strong> Hembra</p>
+                            <p><strong>Peso:</strong> 6.6 kg</p>
+                            <p><strong>Color:</strong> Atigrado</p>
+                            <p><strong>Tamaño:</strong> Pequeño</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=92" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐕
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Rocky 91</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Perro</p>
+                            <p><strong>Raza:</strong> Golden</p>
+                            <p><strong>Género:</strong> Hembra</p>
+                            <p><strong>Peso:</strong> 35.25 kg</p>
+                            <p><strong>Color:</strong> Blanco</p>
+                            <p><strong>Tamaño:</strong> Grande</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=93" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐈
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Simba 92</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Gato</p>
+                            <p><strong>Raza:</strong> Shih Tzu</p>
+                            <p><strong>Género:</strong> Hembra</p>
+                            <p><strong>Peso:</strong> 18.29 kg</p>
+                            <p><strong>Color:</strong> Negro</p>
+                            <p><strong>Tamaño:</strong> Grande</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=94" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐕
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Rocky 93</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Perro</p>
+                            <p><strong>Raza:</strong> Salchicha</p>
+                            <p><strong>Género:</strong> Hembra</p>
+                            <p><strong>Peso:</strong> 35.76 kg</p>
+                            <p><strong>Color:</strong> Marrón</p>
+                            <p><strong>Tamaño:</strong> Mediano</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=95" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐕
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Bella 94</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Perro</p>
+                            <p><strong>Raza:</strong> Persa</p>
+                            <p><strong>Género:</strong> Hembra</p>
+                            <p><strong>Peso:</strong> 12.37 kg</p>
+                            <p><strong>Color:</strong> Dorado</p>
+                            <p><strong>Tamaño:</strong> Grande</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=96" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐕
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Lola 95</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Perro</p>
+                            <p><strong>Raza:</strong> Labrador</p>
+                            <p><strong>Género:</strong> Hembra</p>
+                            <p><strong>Peso:</strong> 14.44 kg</p>
+                            <p><strong>Color:</strong> Atigrado</p>
+                            <p><strong>Tamaño:</strong> Pequeño</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=97" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐕
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Thor 96</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Perro</p>
+                            <p><strong>Raza:</strong> Sphynx</p>
+                            <p><strong>Género:</strong> Macho</p>
+                            <p><strong>Peso:</strong> 8.65 kg</p>
+                            <p><strong>Color:</strong> Blanco</p>
+                            <p><strong>Tamaño:</strong> Pequeño</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=98" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐈
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Nala 97</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Gato</p>
+                            <p><strong>Raza:</strong> Salchicha</p>
+                            <p><strong>Género:</strong> Hembra</p>
+                            <p><strong>Peso:</strong> 5.59 kg</p>
+                            <p><strong>Color:</strong> Negro</p>
+                            <p><strong>Tamaño:</strong> Grande</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=99" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐕
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Bella 98</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Perro</p>
+                            <p><strong>Raza:</strong> Poodle</p>
+                            <p><strong>Género:</strong> Hembra</p>
+                            <p><strong>Peso:</strong> 3.47 kg</p>
+                            <p><strong>Color:</strong> Negro</p>
+                            <p><strong>Tamaño:</strong> Grande</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=100" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐈
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Chispa 99</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Gato</p>
+                            <p><strong>Raza:</strong> Poodle</p>
+                            <p><strong>Género:</strong> Hembra</p>
+                            <p><strong>Peso:</strong> 35.03 kg</p>
+                            <p><strong>Color:</strong> Marrón</p>
+                            <p><strong>Tamaño:</strong> Pequeño</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=101" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+                <div class="pet-card">
+                    
+                        <div class="pet-image" style="display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+                            🐕
+                        </div>
+                    
+
+                    <div class="pet-info">
+                        <h3 class="pet-name">Bella 100</h3>
+                        
+                        <div class="pet-details">
+                            <p><strong>Especie:</strong> Perro</p>
+                            <p><strong>Raza:</strong> Persa</p>
+                            <p><strong>Género:</strong> Macho</p>
+                            <p><strong>Peso:</strong> 25.48 kg</p>
+                            <p><strong>Color:</strong> Atigrado</p>
+                            <p><strong>Tamaño:</strong> Mediano</p>
+                        </div>
+
+                        <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+                            <span class="badge badge-success">
+                                ✅ Esterilizado
+                            </span>
+                            <span class="badge badge-primary">Buena</span>
+                        </div>
+
+                        
+                            <div class="info-mascota">
+                                <strong>🎉 Esta mascota ha sido socializada</strong>
+                            </div>
+                        
+
+                        <a href="/adopcion/adoptar/?mascota=102" class="btn btn-primary" style="width: 100%;">
+                            ❤️ Ver Detalles y Adoptar
+                        </a>
+                    </div>
+                </div>
+            
+        </div>
+    
+</div>
+
+<!-- SCRIPT PARA CARGAR RAZAS DINÁMICAMENTE -->
+<script>
+const razasPorEspecie = {
+    'Perro': ['Labrador Retriever', 'Pastor Alemán', 'Golden Retriever', 'Bulldog Francés', 'Poodle', 'Beagle', 'Otra Raza'],
+    'Gato': ['Persa', 'Maine Coon', 'Siamés', 'Bengalí', 'Ragdoll', 'Scottish Fold', 'Otra Raza'],
+    'Conejo': ['Conejo de Angora', 'Conejo Belier', 'Otra Raza'],
+    'Ave': ['Loro Verde', 'Guacamayo', 'Cacatúa', 'Canario', 'Otra Raza'],
+    'Roedor': ['Hámster', 'Ratón', 'Rata', 'Conejillo de Indias', 'Otra Raza'],
+    'Reptil': ['Serpiente', 'Iguana', 'Dragón Barbudo', 'Tortuga', 'Otra Raza'],
+    'Pez': ['Pez Dorado', 'Carpa Koi', 'Pez Beta', 'Otra Raza']
+};
+
+document.getElementById('especie').addEventListener('change', function() {
+    const especie = this.value;
+    const razaSelect = document.getElementById('raza');
+    razaSelect.innerHTML = '<option value="">Todas las razas</option>';
+    
+    if (especie && razasPorEspecie[especie]) {
+        razasPorEspecie[especie].forEach(raza => {
+            const option = document.createElement('option');
+            option.value = raza;
+            option.textContent = raza;
+            razaSelect.appendChild(option);
+        });
+    }
+});
+</script>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4><i class="fas fa-paw"></i> Hairy Love</h4>
+                    <p>La plataforma número 1 para adopción responsable de mascotas. Conectamos mascotas con familias que las aman.</p>
+                </div>
+                <div class="footer-section">
+                    <h4><i class="fas fa-link"></i> Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="/">🏠 Inicio</a></li>
+                        <li><a href="/mascotas-adopcion/">❤️ Adoptar Mascota</a></li>
+                        <li><a href="/formulario-servicios/">🛎️ Servicios</a></li>
+                        <li><a href="/registro/">📝 Registrarse</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4><i class="fas fa-envelope"></i> Contacto</h4>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> info@hairylove.com</li>
+                        <li><i class="fas fa-phone"></i> +57 (1) 2345-6789</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Bogotá, Colombia</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4><i class="fas fa-share-alt"></i> Síguenos</h4>
+                    <div style="display: flex; gap: 1rem; margin: 1rem 0;">
+                        <a href="#" style="width: 40px; height: 40px; border-radius: 50%; background: rgba(232, 62, 140, 0.2); display: flex; align-items: center; justify-content: center; transition: all 0.3s;"><i class="fab fa-facebook"></i></a>
+                        <a href="#" style="width: 40px; height: 40px; border-radius: 50%; background: rgba(232, 62, 140, 0.2); display: flex; align-items: center; justify-content: center; transition: all 0.3s;"><i class="fab fa-instagram"></i></a>
+                        <a href="#" style="width: 40px; height: 40px; border-radius: 50%; background: rgba(232, 62, 140, 0.2); display: flex; align-items: center; justify-content: center; transition: all 0.3s;"><i class="fab fa-twitter"></i></a>
+                        <a href="#" style="width: 40px; height: 40px; border-radius: 50%; background: rgba(232, 62, 140, 0.2); display: flex; align-items: center; justify-content: center; transition: all 0.3s;"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <hr style="border: none; border-top: 1px solid rgba(255, 255, 255, 0.1); margin: 2rem 0;">
+            
+            <div style="text-align: center; padding: 1rem 0;">
+                <p>&copy; 2024 <strong>Hairy Love</strong> - Plataforma de Adopción de Mascotas</p>
+                <p style="margin-top: 0.5rem; font-size: 0.9rem;">Hecha con <span style="color: #e83e8c; animation: heartbeat 0.6s ease infinite;">❤️</span> para los amantes de las mascotas</p>
+                <p style="margin-top: 0.5rem; font-size: 0.85rem; color: rgba(255, 255, 255, 0.7);">
+                    <a href="#" style="margin: 0 0.5rem;">Privacidad</a> | 
+                    <a href="#" style="margin: 0 0.5rem;">Términos</a> | 
+                    <a href="#" style="margin: 0 0.5rem;">Contacto</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    
+    <script>
+        // Búsqueda rápida dinámicamente
+        document.getElementById('quickSearch').addEventListener('input', function(e) {
+            const query = e.target.value.toLowerCase();
+            if (query.length > 0) {
+                // Aquí irían tus llamadas AJAX para búsqueda
+                console.log('Buscando:', query);
+            }
+        });
+        
+        // Activar enlace actual en navegación
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            if (link.href === window.location.href) {
+                link.classList.add('active');
+            }
+        });
+        
+        // Animación suave de scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+    
+    
+</body>
+</html>

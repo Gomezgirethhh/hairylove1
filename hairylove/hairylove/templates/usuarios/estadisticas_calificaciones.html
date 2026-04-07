@@ -1,0 +1,365 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Estadísticas de Calificaciones - Hairylove{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <!-- Encabezado -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <h1 class="page-title mb-2">📊 Mis Estadísticas de Calificaciones</h1>
+            <p class="text-muted">Visualiza cómo otros usuarios te han calificado en la plataforma</p>
+        </div>
+    </div>
+
+    <!-- Cards de estadísticas principales -->
+    <div class="row mb-4">
+        <!-- Promedio de calificación -->
+        <div class="col-md-4 mb-3">
+            <div class="card stats-card border-0 shadow-sm">
+                <div class="card-body text-center">
+                    <div class="stat-icon mb-3">
+                        <i class="fas fa-star" style="font-size: 2.5rem; color: #ffc107;"></i>
+                    </div>
+                    <h3 class="stat-value">{{ promedio_calificacion|floatformat:1 }}</h3>
+                    <p class="stat-label text-muted">Promedio de Calificación</p>
+                    <div class="star-rating">
+                        {% for i in "12345" %}
+                            {% if forloop.counter <= promedio_calificacion %}
+                                <i class="fas fa-star" style="color: #ffc107;"></i>
+                            {% else %}
+                                <i class="far fa-star" style="color: #ddd;"></i>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Total de calificaciones recibidas -->
+        <div class="col-md-4 mb-3">
+            <div class="card stats-card border-0 shadow-sm">
+                <div class="card-body text-center">
+                    <div class="stat-icon mb-3">
+                        <i class="fas fa-comments" style="font-size: 2.5rem; color: #17a2b8;"></i>
+                    </div>
+                    <h3 class="stat-value">{{ total_calificaciones }}</h3>
+                    <p class="stat-label text-muted">Calificaciones Recibidas</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Calificaciones dadas por el usuario -->
+        <div class="col-md-4 mb-3">
+            <div class="card stats-card border-0 shadow-sm">
+                <div class="card-body text-center">
+                    <div class="stat-icon mb-3">
+                        <i class="fas fa-check-circle" style="font-size: 2.5rem; color: #28a745;"></i>
+                    </div>
+                    <h3 class="stat-value">{{ total_calificaciones_dadas }}</h3>
+                    <p class="stat-label text-muted">Calificaciones que Has Dado</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Distribución de calificaciones -->
+    <div class="row mb-4">
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-light">
+                    <h5 class="card-title mb-0">📈 Distribución de Calificaciones</h5>
+                </div>
+                <div class="card-body">
+                    <!-- 5 estrellas -->
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>
+                                <i class="fas fa-star" style="color: #ffc107;"></i>
+                                <i class="fas fa-star" style="color: #ffc107;"></i>
+                                <i class="fas fa-star" style="color: #ffc107;"></i>
+                                <i class="fas fa-star" style="color: #ffc107;"></i>
+                                <i class="fas fa-star" style="color: #ffc107;"></i>
+                                <span class="ms-2">5 Estrellas</span>
+                            </span>
+                            <span class="badge bg-primary">{{ distribucion.5_estrellas }}</span>
+                        </div>
+                        <div class="progress" style="height: 20px;">
+                            <div class="progress-bar bg-success" role="progressbar" 
+                                 style="width: {% if total_calificaciones > 0 %}{% widthratio distribucion.5_estrellas total_calificaciones 100 %}{% else %}0{% endif %}%"
+                                 aria-valuenow="{{ distribucion.5_estrellas }}" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+
+                    <!-- 4 estrellas -->
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>
+                                <i class="fas fa-star" style="color: #ffc107;"></i>
+                                <i class="fas fa-star" style="color: #ffc107;"></i>
+                                <i class="fas fa-star" style="color: #ffc107;"></i>
+                                <i class="fas fa-star" style="color: #ffc107;"></i>
+                                <i class="far fa-star" style="color: #ddd;"></i>
+                                <span class="ms-2">4 Estrellas</span>
+                            </span>
+                            <span class="badge bg-primary">{{ distribucion.4_estrellas }}</span>
+                        </div>
+                        <div class="progress" style="height: 20px;">
+                            <div class="progress-bar bg-info" role="progressbar" 
+                                 style="width: {% if total_calificaciones > 0 %}{% widthratio distribucion.4_estrellas total_calificaciones 100 %}{% else %}0{% endif %}%"
+                                 aria-valuenow="{{ distribucion.4_estrellas }}" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+
+                    <!-- 3 estrellas -->
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>
+                                <i class="fas fa-star" style="color: #ffc107;"></i>
+                                <i class="fas fa-star" style="color: #ffc107;"></i>
+                                <i class="fas fa-star" style="color: #ffc107;"></i>
+                                <i class="far fa-star" style="color: #ddd;"></i>
+                                <i class="far fa-star" style="color: #ddd;"></i>
+                                <span class="ms-2">3 Estrellas</span>
+                            </span>
+                            <span class="badge bg-primary">{{ distribucion.3_estrellas }}</span>
+                        </div>
+                        <div class="progress" style="height: 20px;">
+                            <div class="progress-bar bg-warning" role="progressbar" 
+                                 style="width: {% if total_calificaciones > 0 %}{% widthratio distribucion.3_estrellas total_calificaciones 100 %}{% else %}0{% endif %}%"
+                                 aria-valuenow="{{ distribucion.3_estrellas }}" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+
+                    <!-- 2 estrellas -->
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>
+                                <i class="fas fa-star" style="color: #ffc107;"></i>
+                                <i class="fas fa-star" style="color: #ffc107;"></i>
+                                <i class="far fa-star" style="color: #ddd;"></i>
+                                <i class="far fa-star" style="color: #ddd;"></i>
+                                <i class="far fa-star" style="color: #ddd;"></i>
+                                <span class="ms-2">2 Estrellas</span>
+                            </span>
+                            <span class="badge bg-primary">{{ distribucion.2_estrellas }}</span>
+                        </div>
+                        <div class="progress" style="height: 20px;">
+                            <div class="progress-bar bg-warning" role="progressbar" 
+                                 style="width: {% if total_calificaciones > 0 %}{% widthratio distribucion.2_estrellas total_calificaciones 100 %}{% else %}0{% endif %}%"
+                                 aria-valuenow="{{ distribucion.2_estrellas }}" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+
+                    <!-- 1 estrella -->
+                    <div class="mb-3">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>
+                                <i class="fas fa-star" style="color: #ffc107;"></i>
+                                <i class="far fa-star" style="color: #ddd;"></i>
+                                <i class="far fa-star" style="color: #ddd;"></i>
+                                <i class="far fa-star" style="color: #ddd;"></i>
+                                <i class="far fa-star" style="color: #ddd;"></i>
+                                <span class="ms-2">1 Estrella</span>
+                            </span>
+                            <span class="badge bg-primary">{{ distribucion.1_estrella }}</span>
+                        </div>
+                        <div class="progress" style="height: 20px;">
+                            <div class="progress-bar bg-danger" role="progressbar" 
+                                 style="width: {% if total_calificaciones > 0 %}{% widthratio distribucion.1_estrella total_calificaciones 100 %}{% else %}0{% endif %}%"
+                                 aria-valuenow="{{ distribucion.1_estrella }}" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Resumen de actividad -->
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-light">
+                    <h5 class="card-title mb-0">📋 Resumen de Actividad</h5>
+                </div>
+                <div class="card-body">
+                    <div class="activity-item mb-3 pb-3 border-bottom">
+                        <div class="d-flex justify-content-between">
+                            <span class="activity-label">
+                                <i class="fas fa-heart" style="color: #dc3545;"></i> Calificaciones Positivas (4-5 ⭐)
+                            </span>
+                            <span class="badge bg-success">
+                                {% widthratio total_calificaciones|add:distribucion.5_estrellas|add:distribucion.4_estrellas total_calificaciones 100 %}%
+                            </span>
+                        </div>
+                        <small class="text-muted">{{ distribucion.5_estrellas|add:distribucion.4_estrellas }} de {{ total_calificaciones }} calificaciones</small>
+                    </div>
+
+                    <div class="activity-item mb-3 pb-3 border-bottom">
+                        <div class="d-flex justify-content-between">
+                            <span class="activity-label">
+                                <i class="fas fa-minus-circle" style="color: #ffc107;"></i> Calificaciones Neutrales (3 ⭐)
+                            </span>
+                            <span class="badge bg-warning">
+                                {% widthratio distribucion.3_estrellas total_calificaciones 100 %}%
+                            </span>
+                        </div>
+                        <small class="text-muted">{{ distribucion.3_estrellas }} de {{ total_calificaciones }} calificaciones</small>
+                    </div>
+
+                    <div class="activity-item pb-3 border-bottom">
+                        <div class="d-flex justify-content-between">
+                            <span class="activity-label">
+                                <i class="fas fa-thumbs-down" style="color: #dc3545;"></i> Calificaciones Negativas (1-2 ⭐)
+                            </span>
+                            <span class="badge bg-danger">
+                                {% widthratio distribucion.1_estrella|add:distribucion.2_estrellas total_calificaciones 100 %}%
+                            </span>
+                        </div>
+                        <small class="text-muted">{{ distribucion.1_estrella|add:distribucion.2_estrellas }} de {{ total_calificaciones }} calificaciones</small>
+                    </div>
+
+                    <div class="mt-4">
+                        <p class="text-center text-muted" style="font-size: 0.9rem;">
+                            {% if total_calificaciones == 0 %}
+                                <em>Aún no has recibido calificaciones. ¡Comienza a interactuar con otros usuarios!</em>
+                            {% else %}
+                                <em>Gracias por ser parte de nuestra comunidad Hairylove</em>
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Calificaciones recientes -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-light">
+                    <h5 class="card-title mb-0">⭐ Calificaciones Recientes</h5>
+                </div>
+                <div class="card-body">
+                    {% if calificaciones_recientes %}
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>De Quién</th>
+                                        <th>Calificación</th>
+                                        <th>Comentario</th>
+                                        <th>Fecha</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for calificacion in calificaciones_recientes %}
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="avatar-circle me-2" style="width: 36px; height: 36px; border-radius: 50%; background-color: #007bff; color: white; display: flex; align-items: center; justify-content: center; font-weight: bold;">
+                                                        {{ calificacion.usuario_califica.nombre|first|upper }}
+                                                    </div>
+                                                    <span>{{ calificacion.usuario_califica.nombre }} {{ calificacion.usuario_califica.apellido }}</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="star-rating">
+                                                    {% for i in "12345" %}
+                                                        {% if forloop.counter <= calificacion.puntuacion %}
+                                                            <i class="fas fa-star" style="color: #ffc107;"></i>
+                                                        {% else %}
+                                                            <i class="far fa-star" style="color: #ddd;"></i>
+                                                        {% endif %}
+                                                    {% endfor %}
+                                                </div>
+                                            </td>
+                                            <td>
+                                                {% if calificacion.comentario %}
+                                                    <small>{{ calificacion.comentario|truncatewords:15 }}</small>
+                                                {% else %}
+                                                    <small class="text-muted"><em>Sin comentario</em></small>
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                <small class="text-muted">{{ calificacion.fecha_creacion|date:"d/m/Y H:i" }}</small>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    {% else %}
+                        <div class="alert alert-info mb-0">
+                            <i class="fas fa-info-circle"></i> Aún no tienes calificaciones recibidas
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botón de regreso -->
+    <div class="row">
+        <div class="col-12 text-center">
+            <a href="{% if request.user.tipo == 'Propietario' %}{% url 'propietario' %}{% elif request.user.tipo == 'Criador' %}{% url 'criador' %}{% else %}{% url 'administrador' %}{% endif %}" class="btn btn-outline-primary">
+                <i class="fas fa-arrow-left"></i> Volver a mi Perfil
+            </a>
+        </div>
+    </div>
+</div>
+
+<style>
+    .page-title {
+        color: #333;
+        font-weight: 700;
+        font-size: 2rem;
+    }
+
+    .stats-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .stats-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+    }
+
+    .stat-value {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #333;
+        margin: 10px 0;
+    }
+
+    .stat-label {
+        font-size: 0.95rem;
+        font-weight: 500;
+    }
+
+    .star-rating {
+        font-size: 0.9rem;
+        letter-spacing: 2px;
+    }
+
+    .card-header {
+        border-bottom: 2px solid #e9ecef;
+    }
+
+    .progress {
+        background-color: #e9ecef;
+    }
+
+    .activity-label {
+        font-weight: 500;
+        color: #333;
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: #f8f9fa;
+    }
+
+    .avatar-circle {
+        font-size: 0.85rem;
+    }
+</style>
+{% endblock %}

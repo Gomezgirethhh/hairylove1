@@ -1,0 +1,167 @@
+<!-- Sección de Calificaciones Recibidas en Perfil -->
+<style>
+    .calificaciones-section {
+        margin-top: 40px;
+    }
+    
+    .calificaciones-header {
+        font-size: 1.5em;
+        color: #FF6B9D;
+        margin-bottom: 20px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        border-bottom: 2px solid #FF6B9D;
+        padding-bottom: 10px;
+    }
+    
+    .calificaciones-card {
+        background: white;
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 15px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        border-left: 4px solid #FFD700;
+        transition: all 0.3s ease;
+    }
+    
+    .calificaciones-card:hover {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+        transform: translateX(5px);
+    }
+    
+    .calificacion-headercard {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+    }
+    
+    .calificacion-usuario {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-grow: 1;
+    }
+    
+    .calificacion-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #FF6B9D, #FF8FBC);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2em;
+        color: white;
+        font-weight: bold;
+        flex-shrink: 0;
+    }
+    
+    .calificacion-usuario-info h5 {
+        margin: 0;
+        color: #333;
+        font-size: 0.95em;
+        font-weight: 600;
+    }
+    
+    .calificacion-usuario-info p {
+        margin: 2px 0 0;
+        color: #999;
+        font-size: 0.8em;
+    }
+    
+    .calificacion-puntuacion {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-weight: 700;
+        font-size: 1.1em;
+        color: #FFD700;
+    }
+    
+    .calificacion-comentario {
+        color: #666;
+        font-size: 0.9em;
+        line-height: 1.5;
+        padding: 12px;
+        background: #f9f9f9;
+        border-radius: 8px;
+        border-left: 3px solid #FFD700;
+        margin-top: 10px;
+    }
+    
+    .calificacion-vacia {
+        text-align: center;
+        padding: 30px 20px;
+        color: #999;
+        background: #f9f9f9;
+        border-radius: 12px;
+        font-style: italic;
+    }
+    
+    .calificaciones-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    @media (max-width: 600px) {
+        .calificacion-headercard {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        
+        .calificacion-puntuacion {
+            margin-top: 10px;
+        }
+    }
+</style>
+
+<div class="calificaciones-section">
+    <!-- Calificaciones Recibidas -->
+    <div class="calificaciones-header">
+        ⭐ Calificaciones Recibidas <span style="font-size: 0.8em; color: #999; margin-left: auto;">(últimas 5)</span>
+    </div>
+    
+    {% if calificaciones_recibidas %}
+        <div class="calificaciones-grid">
+            {% for calificacion in calificaciones_recibidas %}
+                <div class="calificaciones-card">
+                    <div class="calificacion-headercard">
+                        <div class="calificacion-usuario">
+                            <div class="calificacion-avatar">
+                                {{ calificacion.usuario_califica.nombre|first|upper }}
+                            </div>
+                            <div class="calificacion-usuario-info">
+                                <h5>{{ calificacion.usuario_califica.nombre }} {{ calificacion.usuario_califica.apellido }}</h5>
+                                <p>{{ calificacion.fecha_creacion|date:"d/m/Y H:i" }}</p>
+                            </div>
+                        </div>
+                        <div class="calificacion-puntuacion">
+                            {% for _ in "x"|rjust:calificacion.puntuacion %}⭐{% endfor %}
+                            {{ calificacion.puntuacion }}/5
+                        </div>
+                    </div>
+                    
+                    {% if calificacion.comentario %}
+                        <div class="calificacion-comentario">
+                            <strong>💬 Comentario:</strong> {{ calificacion.comentario }}
+                        </div>
+                    {% endif %}
+                    
+                    {% if calificacion.adopcion.idMascota %}
+                        <p style="font-size: 0.85em; color: #999; margin-top: 8px;">
+                            🐾 Mascota: <strong>{{ calificacion.adopcion.idMascota.Nombre_Mascota }}</strong>
+                        </p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="calificacion-vacia">
+            📭 Aún no tienes calificaciones. ¡Completa adopciones y pide a otros que te califiquen!
+        </div>
+    {% endif %}
+</div>
